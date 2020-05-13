@@ -16,5 +16,20 @@
 },
 {"cardfront":"saudi",
 "cardback":"سعودي "
+},
+{"cardfront":"Good morning",
+"cardback":"صباح الخير"
+},
+{"cardfront":"yes",
+"cardback":"نعم"
+},
+{"cardfront":"maybe",
+"cardback":"ربما"
+},
+{"cardfront":"no",
+"cardback":"لا"
+},
+{"cardfront":"maybe",
+"cardback":"ربما"
 }
 ]}
