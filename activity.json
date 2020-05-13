@@ -1,6 +1,7 @@
 {"questionlist":[
 {"cardfront":"Hello my name is Faris",
-"cardback":"مرحبا اسمي فارس"
+"cardback":"مرحبا اسمي فارس",
+"sound":"audio/My name is Faris.mp3"
 },
 {"cardfront":"happiness",
 "cardback":"سعادة "

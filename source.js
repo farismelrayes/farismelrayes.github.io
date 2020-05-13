@@ -14,6 +14,10 @@ function loadDB(){
    qbank[i]=[];
    qbank[i][0]=data.questionlist[i].cardfront;
    qbank[i][1]=data.questionlist[i].cardback;
+   if (data.questionlist[i].hasOwnProperty('sound'))
+	   qbank[i][2]=data.questionlist[i].sound;
+   else
+	   qbank[i][2]=null;
    questionOrder[i]=i
   }//for
   beginActivity();
@@ -37,6 +41,11 @@ function beginActivity(){
    $("#card2").animate({top: "-=200"}, 150, function() {togglePosition2();});
   }//if
  });//click function
+ // Set audio
+ var audio = null;
+ if (qbank[questionOrder[currentQuestion][2]]!=null){
+		 audio = new Audio(qbank[questionOrder[currentQuestion][2]]);
+ }
  currentQuestion++;
  $("#buttonArea").empty();
  $("#buttonArea").append('<div id="nextButton">NEXT</div>');
@@ -54,6 +63,11 @@ function beginActivity(){
 	 currentQuestion=0;
 	 questionOrder.sort(() => Math.random() - 0.5)
 	 beginActivity();
+ })
+ $("#soundButton").on("click", function(){
+	 if (audio!=null){
+		audio.play();
+	 }
  })
 }//beginactivity
 
