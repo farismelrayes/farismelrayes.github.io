@@ -43,8 +43,8 @@ function beginActivity(){
  });//click function
  // Set audio
  var audio = null;
- if (qbank[questionOrder[currentQuestion][2]]!=null){
-		 audio = new Audio(qbank[questionOrder[currentQuestion][2]]);
+ if (qbank[questionOrder[currentQuestion]][2]!=null){
+	 audio = new Audio(qbank[questionOrder[currentQuestion]][2]);
  }
  currentQuestion++;
  $("#buttonArea").empty();
