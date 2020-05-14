@@ -3,6 +3,12 @@
 "cardback":"مرحبا اسمي فارس",
 "sound":"audio/My name is Faris.mp3"
 },
+{"cardfront":"Good morning",
+"cardback":"صَبَاحَ الْخَيْرِ"
+},
+{"cardfront":"Saudi (m/f)",
+"cardback":"سَعُودِيٌّ \\ سَعُودِيَّةٌ (سَعُودِيُّونَ \\ سَعُودِيَّاتٌ) \n(m/f)"
+},
 {"cardfront":"happiness",
 "cardback":"سعادة "
 },
@@ -14,12 +20,6 @@
 },
 {"cardfront":"smile",
 "cardback":"يبتسم "
-},
-{"cardfront":"saudi",
-"cardback":"سعودي "
-},
-{"cardfront":"Good morning",
-"cardback":"صباح الخير"
 },
 {"cardfront":"yes",
 "cardback":"نعم"
