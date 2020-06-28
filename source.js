@@ -9,6 +9,20 @@ var challenging = null
 var onlyShowFlagged = false;
 
 loadDB();
+$("#cardArea").click(function(e){
+	 console.log("toggled");
+  if(cardState!=1){
+   cardState=1;
+   //togglePosition();
+   $("#card1").animate({top: "-=400"}, 150, function() {});
+   $("#card2").animate({top: "-=400"}, 150, function() {});
+  }else{
+	cardState=0;
+	$("#card1").animate({top: "+=400"}, 150, function() {});
+	$("#card2").animate({top: "+=400"}, 150, function() {});
+  }//else
+	  e.stopPropagation();
+ });//click function
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -81,14 +95,6 @@ function beginActivity(){
  $("#card1").css("background-color",color1);
  $("#card2").css("background-color","#34495E");
  $("#card2").css("top","400px");
- $("#cardArea").on("click",function(){
-  if(cardState!=1){
-   cardState=1;
-   //togglePosition();
-   $("#card1").animate({top: "-=400"}, 150, function() {cardState=0;togglePosition();});
-   $("#card2").animate({top: "-=400"}, 150, function() {togglePosition2();});
-  }//if
- });//click function
  
  // Setup flag
  if (challenging[questionOrder[currentQuestion]])
@@ -148,13 +154,5 @@ function beginActivity(){
 	$("#challengeToggle").html(onlyShowFlagged ? "SHOW ALL" : "ONLY SHOW FLAGGED");
  })
 }//beginactivity
-
-function togglePosition(){
- if($("#card1").position().top==-400){$("#card1").css("top","400px");};
-}//toggle
-
-function togglePosition2(){
- if($("#card2").position().top==-400){$("#card2").css("top","400px");};
-}//toggle2
 
 });
