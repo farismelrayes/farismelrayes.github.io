@@ -7,10 +7,14 @@ var questionOrder=new Array;
 var qbank=new Array;
 var challenging = null
 var onlyShowFlagged = false;
+var punctuation = [',','!','.','?',';'];
+
+// If a line exceeds this length in characters, a break will be inserted at the most recent punctuation.
+var PUNCTUATION_WRAP_POINT=20;
+
 
 loadDB();
 $("#cardArea").click(function(e){
-	 console.log("toggled");
   if(cardState!=1){
    cardState=1;
    //togglePosition();
@@ -23,6 +27,34 @@ $("#cardArea").click(function(e){
   }//else
 	  e.stopPropagation();
  });//click function
+
+function punctuationWrap(longtext){
+	var newText = "";
+	longtext.split('<br>').forEach(function(item, index){
+		itemFixed = '';
+		if (item.length >PUNCTUATION_WRAP_POINT) {
+			highest = -1;
+			punctuation.forEach(function(item2, index){
+				i = -1;
+				while ((i = item.indexOf(item2, i+1)) != -1){
+					if (i > highest && i < PUNCTUATION_WRAP_POINT)
+						highest = i
+				}
+			})
+			if (highest!=-1)
+				itemFixed = item.slice(0,highest+1)+'<br>'+item.slice(highest+1)
+			else
+				itemFixed = item;
+			
+		}else{
+			itemFixed = item;
+		}
+		newText+=itemFixed;
+		if (index < longtext.split('br').length - 1)
+			newText+='<br>'
+	})// foreach
+	return newText;
+}
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -64,8 +96,9 @@ function loadDB(){
  $.getJSON("activity.json", function(data) {
   for(i=0;i<data.questionlist.length;i++){
    qbank[i]=[];
-   qbank[i][0]=data.questionlist[i].cardfront.replace('\n','<br>');
-   qbank[i][1]=data.questionlist[i].cardback.replace('\n','<br>');
+   qbank[i][0]=data.questionlist[i].cardfront.replace('\n','<br>').replace('3','<sup>c</sup>');
+   qbank[i][1]=data.questionlist[i].cardback.replace('\n','<br>').replace('3','<sup>c</sup>');
+   
    if ((!chCookieFound) || (challenging.length != data.questionlist.length))
 	   challenging[i]=false;
    if (data.questionlist[i].hasOwnProperty('sound'))
@@ -88,10 +121,9 @@ function beginActivity(){
  cardState=0;
  var color1=colorArray[Math.floor(Math.random()*colorArray.length)];
  $("#cardArea").empty();
- $("#cardArea").append('<img id="flag" class="flag" src="flag.png"/>');
- 
- $("#cardArea").append('<div id="card1" class="card"><div class="card-text-area"><div class="card-text'+ (isEnglish(qbank[questionOrder[currentQuestion]][0]) ? '' : '-arabic') +'">' + qbank[questionOrder[currentQuestion]][0] + '</div></div></div>');
- $("#cardArea").append('<div id="card2" class="card"><div class="card-text-area"><div class="card-text'+ (isEnglish(qbank[questionOrder[currentQuestion]][1]) ? '' : '-arabic') +'">' + qbank[questionOrder[currentQuestion]][1] + '</div></div></div>');
+ $("#cardArea").append('<img id="flag" class="flag" src="flag.png"/>');	
+ $("#cardArea").append('<div id="card1" class="card"><div class="card-text-area"><div class="card-text'+ (isEnglish(qbank[questionOrder[currentQuestion]][0]) ? '' : '-arabic') +'">' + punctuationWrap(qbank[questionOrder[currentQuestion]][0]) + '</div></div></div>');
+ $("#cardArea").append('<div id="card2" class="card"><div class="card-text-area"><div class="card-text'+ (isEnglish(qbank[questionOrder[currentQuestion]][1]) ? '' : '-arabic') +'">' + punctuationWrap(qbank[questionOrder[currentQuestion]][1]) + '</div></div></div>');
  $("#card1").css("background-color",color1);
  $("#card2").css("background-color","#34495E");
  $("#card2").css("top","400px");
