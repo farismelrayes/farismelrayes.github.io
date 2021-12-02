@@ -98,9 +98,7 @@ function loadData(){
 					inProgressScores.push({name: name, score:(difficulty * data[key]['in-progress'][playerScores]['score'])});
 				}
 			}
-			
-			console.log(inProgressScores);
-			
+						
 		}
 	  }
 	  
