@@ -51,6 +51,6 @@ var intervalId = window.setInterval(function(){
 	  
 	  // Update leaderboard view
 	  updateLeaderboardView();
-	}
+	});
 }, 5000);
 
