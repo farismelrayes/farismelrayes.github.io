@@ -54,8 +54,8 @@ function loadData(){
 				// Check if player's name is in scores array
 				var name = data[key]['scores'][playerScores]['name'];
 				var nameFound = false;
-				console.log(scores);
-				for (var score in scores){
+				for (var i = 0; i < scores.length; i++){
+					var score = scores[i];
 					console.log("score name: "+score.name);
 					console.log("name:"+name);
 					if (score.name === name){
