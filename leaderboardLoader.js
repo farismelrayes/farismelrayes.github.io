@@ -1,4 +1,4 @@
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -79,4 +79,22 @@ function updateLeaderboardView() {
     }
 }
 
-updateLeaderboardView();
+// Runs every 5 seconds
+var intervalId = window.setInterval(function(){
+	const starCountRef = ref(db, '/');
+	onValue(starCountRef, (snapshot) => {
+	  const data = snapshot.val();
+	  
+	  // Update scores array to match scores
+	  scores = [];
+	  for (var i = 0; i < data.length; i++) {
+		console.log(data[i]);
+		//Do something
+	  }
+	  
+	  // Update leaderboard view
+	  updateLeaderboardView();
+	  
+	});
+}, 5000);
+
