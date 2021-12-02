@@ -40,14 +40,33 @@ function updateLeaderboardView() {
 
 function loadData(){
 	$.getJSON('https://space-rps-scores-default-rtdb.firebaseio.com//.json', function(data) {
-	  
-	  console.log(data);
-	  // Update scores array to match scores
+	  	  // Update scores array to match scores
 	  scores = [];
 	  
-	  for (var i = 0; i < data.length; i++) {
-		console.log(data[i]);
-		//Do something
+	  for (var key in data) {
+		if (data.hasOwnProperty(key)) {
+			var difficulty = data[key]['difficulty'];
+			for (var playerScores = data[key]['scores']){
+				if (data[key]['scores'][playerScores].hasOwnProperty('placeholder'))
+					continue;
+				
+				// Check if player's name is in scores array
+				var name = data[key]['scores'][playerScores]['name'];
+				var nameFound = false;
+				for (var score in scores){
+					if (score.name === name){
+						nameFound = true;
+						score.score += difficulty * data[key]['scores'][playerScores]['score'];
+						break;
+					}
+				}
+				
+				// otherwise add it manually
+				if (!nameFound){
+					scores.push({name: name, score:(difficulty * data[key]['scores'][playerScores]['score'])});
+				}
+			}
+		}
 	  }
 	  
 	  // Update leaderboard view
