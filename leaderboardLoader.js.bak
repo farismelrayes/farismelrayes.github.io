@@ -1,44 +1,3 @@
-import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
-import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js';
-
-
-// Your web app's Firebase configuration
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-const firebaseConfig = {
-
-  apiKey: "AIzaSyC5F7ocHqlyK0kq89-2Zjv0_vGTF7FOkhA",
-
-  authDomain: "space-rps-scores.firebaseapp.com",
-
-  databaseURL: "https://space-rps-scores-default-rtdb.firebaseio.com",
-
-  projectId: "space-rps-scores",
-
-  storageBucket: "space-rps-scores.appspot.com",
-
-  messagingSenderId: "778814579402",
-
-  appId: "1:778814579402:web:950e1ad557795b6e448a33",
-
-  measurementId: "G-SCLJ8XPK0F"
-
-};
-
-
-// Initialize Firebase
-
-const app = initializeApp(firebaseConfig);
-
-const analytics = getAnalytics(app);
-
-// Get a reference to the database service
-const db = getDatabase(app);
-
-
 let scores = [
     {name: "Player 1", score: 300},
     {name: "Player 2", score: 370},
@@ -81,12 +40,10 @@ function updateLeaderboardView() {
 
 // Runs every 5 seconds
 var intervalId = window.setInterval(function(){
-	const starCountRef = ref(db, '/');
-	onValue(starCountRef, (snapshot) => {
-	  const data = snapshot.val();
-	  
+	$.getJSON('https://space-rps-scores-default-rtdb.firebaseio.com//.json', function(data) {
 	  // Update scores array to match scores
 	  scores = [];
+	  
 	  for (var i = 0; i < data.length; i++) {
 		console.log(data[i]);
 		//Do something
@@ -94,7 +51,6 @@ var intervalId = window.setInterval(function(){
 	  
 	  // Update leaderboard view
 	  updateLeaderboardView();
-	  
-	});
+	}
 }, 5000);
 
