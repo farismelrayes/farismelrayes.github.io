@@ -10,7 +10,7 @@ function updateLeaderboardView() {
     let leaderboard = document.getElementById("leaderboard");
     leaderboard.innerHTML = "";
 
-    scores.sort(function(a, b){ return b.score - a.score  });
+    scores.sort(function(a, b){ return (b.score + b.inprogress) - (a.score + a.inprogress)  });
     let elements = []; // we'll need created elements to update colors later on
     // create elements for each player
     for(let i=0; i<scores.length; i++) {
@@ -19,8 +19,10 @@ function updateLeaderboardView() {
         name.classList.add("name");
         score.classList.add("score");
         name.innerText = scores[i].name;
-        score.innerText = scores[i].score;
-
+		if (scores[i].inprogress == 0)
+			score.innerText = scores[i].score;
+		else
+			score.innerText = scores[i].score+" (+"+scores[i].inprogress+")";
         let scoreRow = document.createElement("div");
         scoreRow.classList.add("row");
         scoreRow.appendChild(name);
