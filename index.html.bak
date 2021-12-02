@@ -1,0 +1,11 @@
+<script src="leaderboardLoader.js"></script> 
+
+<!-- specify a table with a row describing the title of each column -->
+<link rel="stylesheet" href="styles.css">
+<img src="Title.png" alt="Space RPS">
+<img id="leaderboard_title" src="leaderboard.png" alt="Leaderboard">
+<p>Note: Higher difficulty songs count more towards your total score.</p>
+
+<div id="leaderboard" class="container">
+	<!-- scores will be inserted by the script here -->
+</div>
