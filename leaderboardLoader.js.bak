@@ -57,20 +57,20 @@ function loadData(){
 				
 				// Check if player's name is in scores array
 				var name = data[key]['scores'][playerScores]['name'];
-				currentSongScores.name = difficulty * data[key]['scores'][playerScores]['score'];
+				currentSongScores[name] = difficulty * data[key]['scores'][playerScores]['score'];
 				var nameFound = false;
 				for (var i = 0; i < scores.length; i++){
 					var score = scores[i];
 					if (score.name === name){
 						nameFound = true;
-						score.score += currentSongScores.name;
+						score.score += currentSongScores[name];
 						break;
 					}
 				}
 				
 				// otherwise add it manually
 				if (!nameFound){
-					scores.push({name: name, score:currentSongScores.name, inprogress: 0});
+					scores.push({name: name, score:currentSongScores[name], inprogress: 0});
 				}
 			}
 			
@@ -88,7 +88,7 @@ function loadData(){
 				console.log(currentSongScores);
 				console.log(name);
 				if (currentSongScores.hasOwnProperty(name))
-					inprogressFinalScore -= currentSongScores.name;
+					inprogressFinalScore -= currentSongScores[name];
 				inprogressFinalScore = Math.max(0, inprogressFinalScore);
 				
 				for (var i = 0; i < inProgressScores.length; i++){
