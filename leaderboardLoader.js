@@ -55,6 +55,7 @@ function loadData(){
 				var nameFound = false;
 				for (var score in scores){
 					if (score.name === name){
+						console.log(score.name);
 						nameFound = true;
 						score.score += difficulty * data[key]['scores'][playerScores]['score'];
 						break;

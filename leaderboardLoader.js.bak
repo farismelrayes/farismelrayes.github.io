@@ -46,7 +46,7 @@ function loadData(){
 	  for (var key in data) {
 		if (data.hasOwnProperty(key)) {
 			var difficulty = data[key]['difficulty'];
-			for (var playerScores = data[key]['scores']){
+			for (var playerScores in data[key]['scores']){
 				if (data[key]['scores'][playerScores].hasOwnProperty('placeholder'))
 					continue;
 				
