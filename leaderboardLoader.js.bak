@@ -36,7 +36,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 // Get a reference to the database service
-const database = getDatabase(app);
+const db = getDatabase(app);
 
 
 let scores = [
