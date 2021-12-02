@@ -74,8 +74,6 @@ function loadData(){
 	});
 }
 
-console.log("starting load?");
-
 loadData();
 
 // Runs every 5 seconds
