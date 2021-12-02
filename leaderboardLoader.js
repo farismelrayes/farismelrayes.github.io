@@ -84,6 +84,9 @@ function loadData(){
 				var name = data[key]['in-progress'][playerScores]['name'];
 				var nameFound = false;
 				var inprogressFinalScore = difficulty * data[key]['in-progress'][playerScores]['score'];
+				console.log(currentSongScores.hasOwnProperty(name));
+				console.log(currentSongScores);
+				console.log(name);
 				if (currentSongScores.hasOwnProperty(name))
 					inprogressFinalScore -= currentSongScores.name;
 				inprogressFinalScore = Math.max(0, inprogressFinalScore);
