@@ -49,6 +49,7 @@ function loadData(){
 			var difficulty = data[key]['difficulty'];
 			
 			// Update scores array
+			var currentSongScores {};
 			for (var playerScores in data[key]['scores']){
 				
 				if (data[key]['scores'][playerScores]===0)
@@ -56,19 +57,20 @@ function loadData(){
 				
 				// Check if player's name is in scores array
 				var name = data[key]['scores'][playerScores]['name'];
+				currentSongScores.name = difficulty * data[key]['scores'][playerScores]['score'];
 				var nameFound = false;
 				for (var i = 0; i < scores.length; i++){
 					var score = scores[i];
 					if (score.name === name){
 						nameFound = true;
-						score.score += difficulty * data[key]['scores'][playerScores]['score'];
+						score.score += currentSongScore;
 						break;
 					}
 				}
 				
 				// otherwise add it manually
 				if (!nameFound){
-					scores.push({name: name, score:(difficulty * data[key]['scores'][playerScores]['score']), inprogress: 0});
+					scores.push({name: name, score:currentSongScore, inprogress: 0});
 				}
 			}
 			
@@ -81,21 +83,23 @@ function loadData(){
 				// Check if player's name is in scores array
 				var name = data[key]['in-progress'][playerScores]['name'];
 				var nameFound = false;
+				var inprogressFinalScore = difficulty * data[key]['in-progress'][playerScores]['score'];
+				if (name in currentSongScores)
+					inprogressFinalScore -= currentSongScores.name;
+				inprogressFinalScore = Math.max(0, inprogressFinalScore);
+				
 				for (var i = 0; i < inProgressScores.length; i++){
 					var score = inProgressScores[i];	
 					if (score.name === name){
 						nameFound = true;
-						console.log(score.score);
-						console.log(difficulty);
-						console.log(data[key]['in-progress'][playerScores]['score']);
-						score.score += difficulty * data[key]['in-progress'][playerScores]['score'];
+						score.score += inprogressFinalScore;
 						break;
 					}
 				}
 				
 				// otherwise add it manually
 				if (!nameFound){
-					inProgressScores.push({name: name, score:(difficulty * data[key]['in-progress'][playerScores]['score'])});
+					inProgressScores.push({name: name, score:inprogressFinalScore)});
 				}
 			}
 						

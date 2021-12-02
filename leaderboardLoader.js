@@ -49,7 +49,7 @@ function loadData(){
 			var difficulty = data[key]['difficulty'];
 			
 			// Update scores array
-			var currentSongScores {};
+			var currentSongScores = {};
 			for (var playerScores in data[key]['scores']){
 				
 				if (data[key]['scores'][playerScores]===0)
