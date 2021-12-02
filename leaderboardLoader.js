@@ -40,6 +40,8 @@ function updateLeaderboardView() {
 
 function loadData(){
 	$.getJSON('https://space-rps-scores-default-rtdb.firebaseio.com//.json', function(data) {
+	  
+	  console.log(data);
 	  // Update scores array to match scores
 	  scores = [];
 	  
@@ -52,6 +54,8 @@ function loadData(){
 	  updateLeaderboardView();
 	});
 }
+
+console.log("starting load?");
 
 loadData();
 

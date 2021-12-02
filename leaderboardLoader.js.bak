@@ -38,9 +38,10 @@ function updateLeaderboardView() {
     }
 }
 
-// Runs every 5 seconds
-var intervalId = window.setInterval(function(){
+function loadData(){
 	$.getJSON('https://space-rps-scores-default-rtdb.firebaseio.com//.json', function(data) {
+	  
+	  console.log(data);
 	  // Update scores array to match scores
 	  scores = [];
 	  
@@ -52,5 +53,12 @@ var intervalId = window.setInterval(function(){
 	  // Update leaderboard view
 	  updateLeaderboardView();
 	});
+}
+
+loadData();
+
+// Runs every 5 seconds
+var intervalId = window.setInterval(function(){
+	loadData();
 }, 5000);
 
