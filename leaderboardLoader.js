@@ -85,6 +85,9 @@ function loadData(){
 					var score = inProgressScores[i];	
 					if (score.name === name){
 						nameFound = true;
+						console.log(score.score);
+						console.log(difficulty);
+						console.log(data[key]['in-progress'][playerScores]['score']);
 						score.score += difficulty * data[key]['in-progress'][playerScores]['score'];
 						break;
 					}
