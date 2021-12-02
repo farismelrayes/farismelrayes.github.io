@@ -96,6 +96,9 @@ function loadData(){
 				}
 			}
 			
+			console.log(inProgressScores);
+			
+			
 			// Merge in-progress into scores
 			for (let i = 0; i < inProgressScores.length; i++){
 				// Try to find name in scores list and add to inprogress

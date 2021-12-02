@@ -43,7 +43,7 @@ function loadData(){
 	$.getJSON('https://space-rps-scores-default-rtdb.firebaseio.com//.json', function(data) {
 	  	  // Update scores array to match scores
 	  scores = [];
-	  
+	  inProgressScores = [];
 	  for (var key in data) {
 		if (data.hasOwnProperty(key)) {
 			var difficulty = data[key]['difficulty'];
