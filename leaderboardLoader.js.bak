@@ -99,7 +99,7 @@ function loadData(){
 				
 				// otherwise add it manually
 				if (!nameFound){
-					inProgressScores.push({name: name, score:inprogressFinalScore)});
+					inProgressScores.push({name: name, score:inprogressFinalScore});
 				}
 			}
 						

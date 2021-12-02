@@ -63,14 +63,14 @@ function loadData(){
 					var score = scores[i];
 					if (score.name === name){
 						nameFound = true;
-						score.score += currentSongScore;
+						score.score += currentSongScores.name;
 						break;
 					}
 				}
 				
 				// otherwise add it manually
 				if (!nameFound){
-					scores.push({name: name, score:currentSongScore, inprogress: 0});
+					scores.push({name: name, score:currentSongScores.name, inprogress: 0});
 				}
 			}
 			
