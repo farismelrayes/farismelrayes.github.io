@@ -87,7 +87,10 @@ var intervalId = window.setInterval(function(){
 	  
 	  // Update scores array to match scores
 	  scores = [];
-	  
+	  for (var i = 0; i < data.length; i++) {
+		console.log(data[i]);
+		//Do something
+	  }
 	  
 	  // Update leaderboard view
 	  updateLeaderboardView();
