@@ -1,17 +1,16 @@
 let scores = [
-    {name: "Player 1", score: 300},
-    {name: "Player 2", score: 370},
-    {name: "Player 3", score: 500},
-    {name: "Player 4", score: 430},
-    {name: "Player 5", score: 340},
-    {name: "Player 6", score: 500},
+    {name: "test", score: 0, inprogress: 0}
+];
+
+let inProgressScores = [
+	{name: "test", score: 0}
 ];
 
 function updateLeaderboardView() {
     let leaderboard = document.getElementById("leaderboard");
     leaderboard.innerHTML = "";
 
-    scores.sort(function(a, b){ return b.score - a.score  });
+    scores.sort(function(a, b){ return (b.score + b.inprogress) - (a.score + a.inprogress)  });
     let elements = []; // we'll need created elements to update colors later on
     // create elements for each player
     for(let i=0; i<scores.length; i++) {
@@ -20,8 +19,10 @@ function updateLeaderboardView() {
         name.classList.add("name");
         score.classList.add("score");
         name.innerText = scores[i].name;
-        score.innerText = scores[i].score;
-
+		if (scores[i].inprogress == 0)
+			score.innerText = scores[i].score;
+		else
+			score.innerText = scores[i].score+" (+"+scores[i].inprogress+")";
         let scoreRow = document.createElement("div");
         scoreRow.classList.add("row");
         scoreRow.appendChild(name);
@@ -46,6 +47,8 @@ function loadData(){
 	  for (var key in data) {
 		if (data.hasOwnProperty(key)) {
 			var difficulty = data[key]['difficulty'];
+			
+			// Update scores array
 			for (var playerScores in data[key]['scores']){
 				
 				if (data[key]['scores'][playerScores]===0)
@@ -65,7 +68,49 @@ function loadData(){
 				
 				// otherwise add it manually
 				if (!nameFound){
-					scores.push({name: name, score:(difficulty * data[key]['scores'][playerScores]['score'])});
+					scores.push({name: name, score:(difficulty * data[key]['scores'][playerScores]['score']), inprogress: 0});
+				}
+			}
+			
+			// Update in progress scores array
+			for (var playerScores in data[key]['in-progress']){
+				
+				if (data[key]['scores'][playerScores]===0)
+					continue;
+				
+				// Check if player's name is in scores array
+				var name = data[key]['in-progress'][playerScores]['name'];
+				var nameFound = false;
+				for (var i = 0; i < inProgressScores.length; i++){
+					var score = inProgressScores[i];	
+					if (score.name === name){
+						nameFound = true;
+						score.score += difficulty * data[key]['in-progress'][playerScores]['score'];
+						break;
+					}
+				}
+				
+				// otherwise add it manually
+				if (!nameFound){
+					inProgressScores.push({name: name, score:(difficulty * data[key]['in-progress'][playerScores]['score'])});
+				}
+			}
+			
+			// Merge in-progress into scores
+			for (let i = 0; i < inProgressScores.length; i++){
+				// Try to find name in scores list and add to inprogress
+				var nameFound = false;
+				for (let j = 0; j < scores.length; j++){
+					if (scores[j].name === inProgressScores[i].name){
+						nameFound = true;
+						scores[j].inprogress+= inProgressScores[i].score;
+						break;
+					}
+				}
+				
+				// Otherwise, add a new user
+				if (!nameFound){
+					scores.push({name: inProgressScores[i].name, score:0, inprogress:inProgressScores[i].score});
 				}
 			}
 		}
