@@ -74,7 +74,7 @@ function updateLeaderboardView() {
     }
 
     let colors = ["gold", "silver", "#cd7f32"];
-    for(let i=0; i < 3; i++) {
+    for(let i=0; i < 3 && i < elements.length; i++) {
         elements[i].style.color = colors[i];
     }
 }
