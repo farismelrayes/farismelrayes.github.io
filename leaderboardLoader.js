@@ -98,29 +98,27 @@ function loadData(){
 					inProgressScores.push({name: name, score:(difficulty * data[key]['in-progress'][playerScores]['score'])});
 				}
 			}
-			
-			console.log(inProgressScores);
-			
-			
-			// Merge in-progress into scores
-			for (let i = 0; i < inProgressScores.length; i++){
-				// Try to find name in scores list and add to inprogress
-				var nameFound = false;
-				for (let j = 0; j < scores.length; j++){
-					if (scores[j].name === inProgressScores[i].name){
-						nameFound = true;
-						scores[j].inprogress+= inProgressScores[i].score;
-						break;
-					}
-				}
-				
-				// Otherwise, add a new user
-				if (!nameFound){
-					scores.push({name: inProgressScores[i].name, score:0, inprogress:inProgressScores[i].score});
-				}
-			}
+						
 		}
 	  }
+	  
+		// Merge in-progress into scores
+		for (let i = 0; i < inProgressScores.length; i++){
+			// Try to find name in scores list and add to inprogress
+			var nameFound = false;
+			for (let j = 0; j < scores.length; j++){
+				if (scores[j].name === inProgressScores[i].name){
+					nameFound = true;
+					scores[j].inprogress+= inProgressScores[i].score;
+					break;
+				}
+			}
+			
+			// Otherwise, add a new user
+			if (!nameFound){
+				scores.push({name: inProgressScores[i].name, score:0, inprogress:inProgressScores[i].score});
+			}
+		}
 	  
 	  // Update leaderboard view
 	  updateLeaderboardView();
