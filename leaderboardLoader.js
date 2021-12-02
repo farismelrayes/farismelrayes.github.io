@@ -47,9 +47,8 @@ function loadData(){
 		if (data.hasOwnProperty(key)) {
 			var difficulty = data[key]['difficulty'];
 			for (var playerScores in data[key]['scores']){
-				console.log(data[key]['scores'][playerScores]);
 				
-				if (data[key]['scores'][playerScores].hasOwnProperty('placeholder'))
+				if (data[key]['scores'][playerScores]===0)
 					continue;
 				
 				// Check if player's name is in scores array
@@ -57,7 +56,6 @@ function loadData(){
 				var nameFound = false;
 				for (var score in scores){
 					if (score.name === name){
-						console.log(score.name);
 						nameFound = true;
 						score.score += difficulty * data[key]['scores'][playerScores]['score'];
 						break;

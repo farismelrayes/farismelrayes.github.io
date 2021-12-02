@@ -47,7 +47,9 @@ function loadData(){
 		if (data.hasOwnProperty(key)) {
 			var difficulty = data[key]['difficulty'];
 			for (var playerScores in data[key]['scores']){
-				if (data[key]['scores'][playerScores].hasOwnProperty('placeholder'))
+				console.log(data[key]['scores'][playerScores]);
+				
+				if (data[key]['scores'][playerScores]===0)
 					continue;
 				
 				// Check if player's name is in scores array
