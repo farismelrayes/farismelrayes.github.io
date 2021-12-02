@@ -47,6 +47,8 @@ function loadData(){
 		if (data.hasOwnProperty(key)) {
 			var difficulty = data[key]['difficulty'];
 			for (var playerScores in data[key]['scores']){
+				console.log(data[key]['scores'][playerScores]);
+				
 				if (data[key]['scores'][playerScores].hasOwnProperty('placeholder'))
 					continue;
 				
